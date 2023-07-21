@@ -1,0 +1,23 @@
+version: 2.1
+
+orbs:
+  iac: rocket-technology/iac@1.0.0
+workflows:
+  lint-and-test:
+    jobs:
+      - iac/tf-fmt-and-validate
+      - iac/tflint:
+          requires:
+            - iac/tf-fmt-and-validate
+          context: "terratest-sandbox"
+      - iac/tfsec:
+          requires:
+            - iac/tf-fmt-and-validate
+      - iac/test:
+          test-parallelism: 10
+          aws-region: "us-west-2"
+          test-timeout: "120m"
+          requires:
+            - iac/tflint
+            - iac/tfsec
+          context: "terratest-sandbox"

@@ -1,0 +1,10 @@
+projecturl: 'https://git.rockfin.com/orgs/terraform/projects/2'
+
+issue:
+  label: 'team:database'
+  open:
+    columnname: 'To-Do'
+pullrequest:
+  label: 'team:database'
+  open:
+    columnname: 'Draft'
